@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Ninja(name) {
+
+        this.name = name;
+
+        //method: sayName() log Ninja's name
+        Ninja.prototype.sayName = function() {
+            console.log("My ninja name is " + this.name + "!");
+            return this
+        };
+
+        //method: showStats() show ninja's strength, speed, and health
+        Ninja.prototype.showStats = function() {
+            console.log("Name: " + this.name + ", Health: " + health + ", Speed: " + speed + ", Strength: " + strength)
+            return this
+        }
+
+        // method: drinkSake() add 10 health to ninja
+        Ninja.prototype.drinkSake = function() {
+            health += 10;
+            return health
+        };
+    }
+
+    
+
+    //speed and strength are 3 by default, health is 100 by default
+    Ninja.prototype.speed = 3;
+    Ninja.prototype.strength = 3;
+    Ninja.prototype.health = 100;
+
+    //method: punch() take another Ninja and -10 health
+    Ninja.prototype.punch = function(name) {
+        var damage = 10;
+        if (this instanceof Ninja) {
+            this.health -= damage;
+            console.log(`${this.name} was punched by ${name.name} and lost ${damage} health!`);
+        } else {
+            console.log("could not kick; not instance of Ninja class");
+        }
+        return this.health;
+    };
+
+    Ninja.prototype.kick = function(name) {
+        var damage = 15 * this.strength;
+        if (this instanceof Ninja) {
+            this.health -= damage;
+            console.log(`${this.name} was kicked by ${name.name} and lost ${damage} health!`);
+        } else {
+            console.log("could not kick; not instance of Ninja class");
+        }
+        return this.health;
+    };
+
+    const blueNinja = new Ninja("Goemon");
+    const redNinja = new Ninja("Bill Gates");
+
+    blueNinja.punch(redNinja);
+    console.log(blueNinja.name + ": " + blueNinja.health)
+    console.log(redNinja.name + ": " + redNinja.health)
+
+    blueNinja.kick(redNinja);
+    console.log(blueNinja.name + ": " + blueNinja.health)
+    console.log(redNinja.name + ": " + redNinja.health)
+    </script>
+</body>
+
+</html>
